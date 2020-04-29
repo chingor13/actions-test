@@ -32,7 +32,7 @@ jobs:
               pull_number: context.payload.pull_request.number,
               event: 'APPROVE'
             });
-            github.pulls.issues.addLabels({
+            github.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.pull_request.number,
