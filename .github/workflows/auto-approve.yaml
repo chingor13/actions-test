@@ -30,11 +30,11 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number
             });
-            const files = response.data.map(file => file.filename);
-            console.log(files);
-            if (files.length != 2) {
-              console.log("expected 2 files");
+            const files = new Set(response.data.map(file => file.filename));
+            if (files.size != 2 || !files.has("README.md") || !files.has("synth.metadata")) {
+              return;
             }
+
             await github.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
