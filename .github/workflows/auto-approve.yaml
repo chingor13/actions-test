@@ -25,14 +25,14 @@ jobs:
             if (context.payload.sender.login != "chingor13") {
               return;
             }
-            github.pulls.createReview({
+            await github.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Rubber stamped!',
               pull_number: context.payload.pull_request.number,
               event: 'APPROVE'
             });
-            github.issues.addLabels({
+            await github.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.pull_request.number,
