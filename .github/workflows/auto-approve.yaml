@@ -28,7 +28,7 @@ jobs:
             github.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Auto approving!',
+              body: 'Rubber stamped!',
               pull_number: context.payload.pull_request.number,
               event: 'APPROVE'
             });
@@ -36,7 +36,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.payload.pull_request.number,
-              labels: {
-                labels: ["automerge"]
-              }
+              labels: ["automerge"]
             });
