@@ -30,7 +30,6 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number
             });
-            files = files.map(file => file.filename);
             console.log(files);
             if (files.length != 2) {
               console.log("expected 2 files");
