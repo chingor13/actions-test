@@ -23,7 +23,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             console.log(context);
-            github.pulls.submitReview({
+            github.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Auto approving!',
