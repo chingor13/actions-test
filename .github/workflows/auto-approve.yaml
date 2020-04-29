@@ -25,6 +25,16 @@ jobs:
             if (context.payload.sender.login != "chingor13") {
               return;
             }
+            const response = await github.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number
+            });
+            const files = new Set(response.data.map(file => file.filename));
+            if (files.size != 2 || !files.has("README.md") || !files.has("synth.metadata")) {
+              return;
+            }
+
             await github.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
