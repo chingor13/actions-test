@@ -25,6 +25,15 @@ jobs:
             if (context.payload.sender.login != "chingor13") {
               return;
             }
+            let files = await github.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payloady.pull_request.number
+            }).map(file => file.filename);
+            console.log(files);
+            if (files.length != 2 && ) {
+
+            }
             await github.pulls.createReview({
               owner: context.repo.owner,
               repo: context.repo.repo,
