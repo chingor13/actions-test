@@ -1,5 +1,5 @@
 steps:
 - name: 'ubuntu'
-    args: ['echo', 'foobar']
+  args: ['echo', 'foobar']
 - name: 'ubuntu'
-    args: ['sleep', '2m']
+  args: ['sleep', '2m']
