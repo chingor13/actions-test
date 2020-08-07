@@ -32,7 +32,7 @@ jobs:
         id: detect
         run: "test $(git status --porcelain | grep -v synth.metadata | wc -l) -gt 0 && echo '::set-env name=has_changes::true'"
       - name: Open Pull Request
-        if: ${{ jobs.templates.steps.detect.outputs.has_changes == 'true' }}
+        if: ${{ steps.detect.outputs.has_changes == 'true' }}
         run: echo "should open pull request"
         # uses: googleapis/code-suggester@v1
         # env:
