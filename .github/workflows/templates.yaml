@@ -24,10 +24,10 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Install synthtool
-        run: pip install git+https://github.com/googleapis/synthtool.git
-      - name: Run synthtool
-        run: python3 -m synthtool
+    #   - name: Install synthtool
+    #     run: pip install git+https://github.com/googleapis/synthtool.git
+    #   - name: Run synthtool
+    #     run: python3 -m synthtool
       - name: Show Changes
         run: "git status --porcelain"
       - name: Detect Code Changes
