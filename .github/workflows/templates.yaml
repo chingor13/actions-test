@@ -39,7 +39,7 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.CODE_SUGGESTER_ACCESS_TOKEN }}
         with:
           command: pr
-          upstream_owner: chingr
+          upstream_owner: chingor13
           upstream_repo: actions-test
           description: "Running synthtool"
           title: "chore: regenerate common templates"
