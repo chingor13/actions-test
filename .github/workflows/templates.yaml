@@ -45,5 +45,6 @@ jobs:
           title: "chore: regenerate common templates"
           message: "chore: regenerate common templates"
           branch: synthtool-templates
+          force: true
           git_dir: "."
 
