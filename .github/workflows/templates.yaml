@@ -24,29 +24,26 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-    #   - name: Install synthtool
-    #     run: pip install git+https://github.com/googleapis/synthtool.git
-    #   - name: Run synthtool
-    #     run: python3 -m synthtool
-      - name: Show Changes
-        run: "git status --porcelain"
+      - name: Install synthtool
+        run: pip install git+https://github.com/googleapis/synthtool.git
+      - name: Run synthtool
+        run: python3 -m synthtool
       - name: Detect Code Changes
         id: has_changes
         run: "test $(git status --porcelain | grep -v synth.metadata | wc -l) -gt 0"
         continue-on-error: true
       - name: Open Pull Request
         if: ${{ steps.has_changes.outcome == 'success' }}
-        run: echo "should open pull request"
-        # uses: googleapis/code-suggester@v1
-        # env:
-        #   ACCESS_TOKEN: ${{ secrets.CODE_SUGGESTER_ACCESS_TOKEN }}
-        # with:
-        #   command: pr
-        #   upstreamOwner: chingor13
-        #   upstreamRepo: actions-test
-        #   description: "Running synthtool"
-        #   title: "chore: regenerate common templates"
-        #   message: ""
-        #   branch: synthtool-templates
-        #   gitDir: "."
+        uses: googleapis/code-suggester@v1.1.0
+        env:
+          ACCESS_TOKEN: ${{ secrets.CODE_SUGGESTER_ACCESS_TOKEN }}
+        with:
+          command: pr
+          upstream_owner: chingr
+          upstream_repo: actions-test
+          description: "Running synthtool"
+          title: "chore: regenerate common templates"
+          message: "chore: regenerate common templates"
+          branch: synthtool-templates
+          gitDir: "."
 
