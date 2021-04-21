@@ -14,7 +14,7 @@ jobs:
             console.log(context);
             const ref = context.payload.release.tag_name;
             console.log(ref);
-            const versionRegex = new RegExp('v?(\d+)\.\d+\.\d+');
+            const versionRegex = new RegExp('v?(\\d+)\\.\\d+\\.\\d+');
             console.log(versionRegex);
             const match = ref.match(versionRegex);
             console.log(match);
