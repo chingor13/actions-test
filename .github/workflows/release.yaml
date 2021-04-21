@@ -11,9 +11,12 @@ jobs:
         id: parse-major
         with:
           script: |
+            console.log(context);
             const ref = "${{ github.event.GITHUB_REF }}";
+            console.log(ref);
             const versionRegex = new RegExp('v?(\d+)\.\d+\/\d+.*');
             const match = ref.match(versionRegex);
+            console.log(match);
             if (match) {
               return "v" + match[1];
             }
