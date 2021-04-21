@@ -11,13 +11,9 @@ jobs:
         id: parse-major
         with:
           script: |
-            console.log(context);
             const ref = context.payload.release.tag_name;
-            console.log(ref);
             const versionRegex = new RegExp('v?(\\d+)\\.\\d+\\.\\d+');
-            console.log(versionRegex);
             const match = ref.match(versionRegex);
-            console.log(match);
             if (match) {
               return "v" + match[1];
             }
@@ -25,7 +21,7 @@ jobs:
           result-encoding: string
       - name: delete existing major tag
         run: |
-          (git -d ${{ steps.parse-major.outputs.result }} && git push origin :${{ steps.parse-major.outputs.result }}) || true
+          (git tag -d ${{ steps.parse-major.outputs.result }} && git push origin :${{ steps.parse-major.outputs.result }}) || true
         if: ${{ steps.parse-major.outputs.result }}
       - name: create major tag
         run: |
