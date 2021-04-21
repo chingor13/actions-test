@@ -1,0 +1,30 @@
+on:
+  release:
+    types: [published]
+name: release
+jobs:
+  update-major:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v3
+        id: parse-major
+        with:
+          script: |
+            const ref = "${{ github.event.GITHUB_REF }}";
+            const versionRegex = new RegExp('v?(\d+)\.\d+\/\d+.*');
+            const match = ref.match(versionRegex);
+            if (match) {
+              return "v" + match[1];
+            }
+            return "";
+          result-encoding: string
+      - name: delete existing major tag
+        run: |
+          (git -d ${{ steps.parse-major.outputs.result }} && git push origin :${{ steps.parse-major.outputs.result }}) || true
+        if: ${{ steps.parse-major.outputs.result }}
+      - name: create major tag
+        run: |
+          git tag ${{ steps.parse-major.outputs.result }} ${{ github.event.GITHUB_REF }}
+          git push origin --tags
+        if: ${{ steps.parse-major.outputs.result }}
