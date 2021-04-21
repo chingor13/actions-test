@@ -12,7 +12,7 @@ jobs:
         with:
           script: |
             console.log(context);
-            const ref = "${{ github.event.GITHUB_REF }}";
+            const ref = context.payload.release.tag_name;
             console.log(ref);
             const versionRegex = new RegExp('v?(\d+)\.\d+\/\d+.*');
             const match = ref.match(versionRegex);
