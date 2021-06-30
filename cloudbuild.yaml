@@ -3,3 +3,5 @@ steps:
   args: ['echo', 'foobar']
 - name: 'ubuntu'
   args: ['sleep', '30']
+- name: 'ubuntu'
+  args: ['echo', 'done']
