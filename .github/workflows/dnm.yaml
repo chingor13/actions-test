@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v7
-        if: github.event.label.name == 'do not merge' && github.event.pull_request.action == 'labeled'
+        if: github.event.label.name == 'do not merge' && github.event.action == 'labeled'
         with:
           script: |
             github.rest.issues.addLabels({
@@ -17,7 +17,7 @@ jobs:
               labels: ['labeled']
             })
       - uses: actions/github-script@v7
-        if: github.event.label.name == 'do not merge' && github.event.pull_request.action == 'unlabeled'
+        if: github.event.label.name == 'do not merge' && github.event.action == 'unlabeled'
         with:
           script: |
             github.rest.issues.addLabels({
