@@ -10,19 +10,21 @@ jobs:
         if: github.event.label.name == 'do not merge' && github.event.action == 'labeled'
         with:
           script: |
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number,
+            github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ['labeled']
+              name: "Do Not Merge",
+              head_sha: context.pull_request.head.sha,
+              conclusion: "failure"
             })
       - uses: actions/github-script@v7
         if: github.event.label.name == 'do not merge' && github.event.action == 'unlabeled'
         with:
           script: |
             github.rest.issues.addLabels({
-              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ['unlabeled']
+              name: "Do Not Merge",
+              head_sha: context.pull_request.head.sha,
+              conclusion: "success"
             })
