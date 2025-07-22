@@ -36,3 +36,5 @@ jobs:
                 summary: "Ok to merge, label not found"
               }
             })
+permissions:
+  checks: write
